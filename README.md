@@ -1,7 +1,7 @@
 
 
 #### NOTE:
-
+* This is Modified version of Anikatsu with some added features by me
 * This's an **Educational** Project.
 * I am **NOT** promoting the use of free anime websites by any means.
 * Open Source :)
