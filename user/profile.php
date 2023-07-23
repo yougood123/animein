@@ -45,7 +45,20 @@ if (isset($_POST['username'])) {
   }
 }
 
+
+session_start();
+
+// Check if the account has been deleted
+if (isset($_SESSION['account_deleted']) && $_SESSION['account_deleted'] === true) {
+  // Redirect to a different page, such as the homepage or login page
+  header('Location: https://animein.fun/home'); // Replace with your actual website URL
+  exit;
+}
+
+// ... (rest of the profile.php code)
+
 ?>
+
 
 <!-- ... (rest of the HTML code) -->
 
@@ -311,13 +324,44 @@ if (isset($_POST['username'])) {
                   <input type="file" name="avatar" id="avatar" accept="image/jpeg, image/png, image/gif">
                 </div>
                 <button type="submit" class="btn btn-primary">Upload Avatar</button>
+                
+                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAccountModal">Delete Account</button>
+
               </form>
+  
             </div>
           </div>
         </div>
         <div class="clearfix"></div>
       </div>
     </div>
+    
+                <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteAccountModalLabel">Confirm Account Deletion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete your account? This action cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <form method="post" action="delete_account.php">
+          <button type="submit" class="btn btn-danger">Delete Account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<style>.modal-dialog .modal-body{
+ color:#020202;
+}
+</style>
 
     <?php include '../_php/footer.php' ?>
      <div id="mask-overlay"></div>
